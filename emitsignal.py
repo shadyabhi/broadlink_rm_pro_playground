@@ -16,15 +16,14 @@ def discovery_device():
     return device
 
 
-def main():
+def emit_signal(payload):
     device = discovery_device()
     device.auth()
 
-    payload = sys.argv[1]
-    ir_payload = pickle.load(open(payload, "rb"))
+    ir_payload = pickle.load(open("payloads/" + payload, "rb"))
     device.send_data(ir_payload)
     print "Signal %s sent" % (payload)
 
 
 if __name__ == "__main__":
-    main()
+    emit_signal()
